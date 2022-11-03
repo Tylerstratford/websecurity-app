@@ -1,11 +1,17 @@
-import React from 'react'
+import React from "react";
+import Post from "./Post";
 
-function Posts() {
+const Posts = ({ posts }) => {
+  console.log(posts);
   return (
-      <div>
-          <h1>Posts</h1>
+    <div className="container">
+      <div className="posts-container">
+        <h1>Posts</h1>
+        {/* && is if statement */}
+        {posts && posts.map((post) => <Post key={post.id} post={post} />)}
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Posts
+export default Posts;

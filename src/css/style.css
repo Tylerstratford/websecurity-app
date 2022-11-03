@@ -76,6 +76,11 @@ form button {
   width: 150px;
   height: 25px;
   color: white;
+  cursor: pointer;
+}
+
+.posts-container {
+  margin-top: 1rem;
 }
 
 .container {
