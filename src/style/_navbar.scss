@@ -1,0 +1,19 @@
+.navbar-container {
+    height: 5vh;
+    display: flex;
+    background: transparent;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    left: 50%;
+    transform: translate(-50%, 20%);
+
+    .navbar-right {
+        display: flex;
+        justify-content: space-between;
+        p {
+            margin-left: 2rem;
+        }
+    }
+}

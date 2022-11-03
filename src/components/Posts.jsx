@@ -6,8 +6,7 @@ const Posts = ({ posts }) => {
   return (
     <div className="container">
       <div className="posts-container">
-        <h1>Posts</h1>
-        {/* && is if statement */}
+        <p className="blog-post-title">Posts</p>
         {posts && posts.map((post) => <Post key={post.id} post={post} />)}
       </div>
     </div>

@@ -29,7 +29,6 @@ const MessageForm = ({ addMessage }) => {
       body: formData.body,
     };
 
-    console.log(message.id, message.title, message.body);
     addMessage(message);
   };
 
@@ -48,14 +47,14 @@ const MessageForm = ({ addMessage }) => {
               onChange={handleChange}
               name="title"
             ></input>
-            <p>{error}</p>
+            <p className="error-message">{error}</p>
             <div>
               <textarea
                 placeholder="Write something..."
                 onChange={handleChange}
                 name="body"
               />
-              <p>{error}</p>
+              <p className="error-message">{error}</p>
             </div>
             <input className="upload-image" type="file"></input>
             <button>Submit blog</button>

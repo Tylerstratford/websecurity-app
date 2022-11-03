@@ -1,7 +1,9 @@
 import "./css/style.css";
 import Form from "./components/Form";
 import Posts from "./components/Posts";
-import {useState} from 'react'
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import LandingPage from "./views/LandingPage";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -11,11 +13,11 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        <Form  addMessage={addMessage}/>
-      </div>
+      <Navbar className="container" />
       <div>
-        <Posts  posts={messages}/>
+        <LandingPage />
+        <Form addMessage={addMessage} />
+        <Posts posts={messages} />
       </div>
     </>
   );

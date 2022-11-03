@@ -1,0 +1,51 @@
+.background-landing {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1032%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='rgba(102%2c 191%2c 140%2c 1)'%3e%3c/rect%3e%3cpath d='M0%2c574.787C105.862%2c582.961%2c197.768%2c501.683%2c276.957%2c430.953C347.863%2c367.621%2c391.188%2c283.005%2c425.81%2c194.461C458.811%2c110.062%2c470.346%2c22.744%2c472%2c-67.863C473.938%2c-174.066%2c494.805%2c-289.391%2c436.259%2c-378.021C375.896%2c-469.403%2c267.652%2c-527.575%2c159.04%2c-541.641C56.055%2c-554.978%2c-31.19%2c-473.918%2c-132.63%2c-451.697C-244.809%2c-427.124%2c-385.24%2c-485.321%2c-466.859%2c-404.535C-547.616%2c-324.601%2c-523.032%2c-187.231%2c-514.278%2c-73.942C-506.885%2c21.733%2c-468.126%2c108.701%2c-420.75%2c192.15C-376.91%2c269.37%2c-316.464%2c330.463%2c-250.77%2c390.206C-172.395%2c461.482%2c-105.624%2c566.631%2c0%2c574.787' fill='%2338865a'%3e%3c/path%3e%3cpath d='M1440 919.892C1508.164 931.0219999999999 1576.445 900.0550000000001 1634.9859999999999 863.405 1693.99 826.466 1747.672 776.875 1772.391 711.798 1796.435 648.498 1787.703 577.648 1768.153 512.819 1750.417 454.006 1701.787 413.889 1667.2350000000001 363.099 1627.094 304.094 1618.446 204.80399999999997 1548.611 190.10399999999998 1477.058 175.04199999999997 1431.529 272.576 1363.406 299.144 1304.0140000000001 322.307 1231.613 297.655 1179.327 334.126 1121.878 374.198 1071.565 436.433 1066.435 506.289 1061.35 575.527 1112.5529999999999 634.674 1153.116 691.015 1187.4279999999999 738.674 1236.144 769.1510000000001 1282.05 805.775 1333.874 847.12 1374.571 909.2080000000001 1440 919.892' fill='%23aeddc2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1032'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .landing-display {
+    width: 1078px;
+    height: 80vh;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 18px;
+  }
+
+  .landing-display-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background: #bfefd4;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+
+    h1 {
+      color: white;
+      margin: 0;
+    }
+    h2 {
+      color: white;
+      margin: 0;
+    }
+  }
+
+  .landing-display-right {
+    background: #aee3c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    width: 50%;
+    background: white;
+
+    .landing-image {
+      width: 75%;
+      height: 75%;
+    }
+  }
+}

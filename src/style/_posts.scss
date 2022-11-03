@@ -1,3 +1,33 @@
 .posts-container {
-    margin-top: 1rem;
+  margin-top: 1rem;
+  .blog-post-title {
+    color: #3c91e6;
+    font-size: 2rem;
+  }
+}
+
+.new-posts-title {
+  font-weight: 400;
+  font-size: 2rem;
+}
+.post-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 18px;
+  margin-bottom: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  .blog-title {
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0;
+    margin-bottom: 0.4rem;
+    color: #3c91e6;
+  }
+
+  .blog-body {
+    font-size: 0.8rem;
+    font-weight: 200;
+    margin: 0;
+  }
 }
