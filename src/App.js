@@ -1,10 +1,18 @@
-import './App.css';
+import "./css/style.css";
+import Form from "./components/Form";
+import Posts from "./components/Posts";
+
 
 function App() {
   return (
-    <div >
-
-    </div>
+    <>
+      <div className ="container">
+        <Form />
+      </div>
+      <div>
+        <Posts />
+      </div>
+    </>
   );
 }
 
