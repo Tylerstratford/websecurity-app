@@ -34,7 +34,6 @@ const MessageForm = ({ addMessage }) => {
 
   return (
     <div>
-      <header>My Blog</header>
       <div className="form-container">
         <div className="form-left">
           <h1>Create a post</h1>

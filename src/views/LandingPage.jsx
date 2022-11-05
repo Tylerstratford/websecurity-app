@@ -6,7 +6,7 @@ function LandingPage() {
       <div className="landing-display">
         <div className="landing-display-left">
           <div className="landing-display-left-text-container">
-            <h1>Endpoint:</h1>
+            <h1>Endpoint</h1>
             <h2>Making it count</h2>
           </div>
         </div>

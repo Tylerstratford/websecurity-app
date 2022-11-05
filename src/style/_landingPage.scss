@@ -4,12 +4,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 
   .landing-display {
     width: 1078px;
-    height: 80vh;
+    height: 50vh;
     display: flex;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     border-radius: 18px;
   }
 
@@ -26,10 +28,12 @@
     h1 {
       color: white;
       margin: 0;
+      font-size: 4rem;
     }
     h2 {
       color: white;
       margin: 0;
+      font-style: italic;
     }
   }
 

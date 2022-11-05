@@ -1,9 +1,4 @@
-header {
-  color: #fa824c;
-  font-size: 3rem;
-  font-weight: 600;
-  text-align: center;
-}
+
 
 .form-container {
   display: flex;
@@ -11,10 +6,13 @@ header {
   border-radius: 18px;
   margin: 0 auto;
   height: auto;
+  width: 1078px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+
   .form-left {
-    width: 45%;
+    width: 50%;
     height: auto;
-    background: #6e44ff;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +20,7 @@ header {
     border-bottom-left-radius: 18px;
 
     h1 {
-      color: white;
+      color: black;
     }
   }
 
@@ -33,24 +31,28 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 65%;
+    width: 50%;
   }
 }
 
 form {
   height: auto;
-  width: 75%;
+  width: 100%;
 
   .title-input {
     margin-bottom: 1rem;
     outline: none;
     border: none;
-    border-bottom: 1px solid #b892ff;
+    font-size: 1.5rem;
+    border-bottom: 1px solid black;
     position: relative;
+    padding-left: 0.5rem;
+
   }
 
   input::placeholder {
     color: gray;
+    font-size: 1.5rem;
   }
 
   .error-message {
@@ -61,13 +63,16 @@ form {
 
   textarea {
     resize: none;
-    width: 100%;
+    width: 95%;
     height: 100px;
     max-height: 150px;
-    outline: #B892FF;
-    border: 1px solid #B892FF;
+    outline: black;
+    border: 1px solid black;
     margin-bottom: 1rem;
+    font-size: 1.2rem;
     font-family: "Roboto", sans-serif;
+    padding-left: 0.5rem;
+    margin-right: 2rem;
   }
   textarea::placeholder {
     font-family: "Roboto", sans-serif;
@@ -83,11 +88,13 @@ form {
     outline: none;
     border: none;
     width: 150px;
-    height: 25px;
+    height: 35px;
     color: white;
     font-weight: 600;
     cursor: pointer;
     float: right; 
+    margin-right: 1rem;
+    font-size: 1.2rem;
     transition: all 0.2s ease;
     &:hover {
         background: #FF90B3;

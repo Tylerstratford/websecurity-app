@@ -1,13 +1,11 @@
 .navbar-container {
-    height: 5vh;
-    display: flex;
-    background: transparent;
+    height: 10vh;
+    width: 100%;
+    background: black;
     position: fixed;
-    justify-content: space-between;
-    align-items: center;
     color: white;
     left: 50%;
-    transform: translate(-50%, 20%);
+    transform: translate(-50%, 0);
 
     .navbar-right {
         display: flex;
@@ -15,5 +13,12 @@
         p {
             margin-left: 2rem;
         }
+    }
+
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    align-items: center;
+
     }
 }
