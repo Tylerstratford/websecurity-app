@@ -1,0 +1,24 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+
+  .login-container {
+    text-align: center;
+    width: 150px;
+    height: 100px;
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:hover {
+        .login {
+            color: white;
+        }
+      background: black;
+    }
+  }
+}

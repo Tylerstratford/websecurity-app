@@ -1,4 +1,6 @@
 .navbar-container {
+    position: relative;
+    z-index: 99;
     height: 10vh;
     width: 100%;
     background: black;
@@ -10,8 +12,16 @@
     .navbar-right {
         display: flex;
         justify-content: space-between;
-        p {
+
+        .navLink {
             margin-left: 2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+                transform: scale(1.02);
+            }
         }
     }
 

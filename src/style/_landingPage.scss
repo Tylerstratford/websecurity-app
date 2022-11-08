@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   background-size: contain;
-  background-repeat: no-repeat;
+  background-repeat: round;
 
   .landing-display {
     width: 1078px;
@@ -26,12 +26,12 @@
     border-bottom-left-radius: 18px;
 
     h1 {
-      color: white;
+      color: black;
       margin: 0;
       font-size: 4rem;
     }
     h2 {
-      color: white;
+      color: Black;
       margin: 0;
       font-style: italic;
     }

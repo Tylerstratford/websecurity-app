@@ -33,7 +33,7 @@ const MessageForm = ({ addMessage }) => {
   };
 
   return (
-    <div>
+    <div className="form-page-container">
       <div className="form-container">
         <div className="form-left">
           <h1>Create a post</h1>

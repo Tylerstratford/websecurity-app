@@ -4,20 +4,29 @@ import Posts from "./components/Posts";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import LandingPage from "./views/LandingPage";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./views/LoginPage";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const addMessage = (message) => {
     setMessages((state) => [...state, message]);
   };
-
   return (
     <>
       <Navbar className="container" />
       <div>
-        <LandingPage />
-        <Form addMessage={addMessage} />
-        <Posts posts={messages} />
+        <Routes>
+          <Route
+            path="/"
+            element={[<LandingPage />, <Posts posts={messages} />]}
+          />
+          <Route
+            path="/createBlogPost"
+            element={<Form addMessage={addMessage} />}
+          />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
       </div>
     </>
   );
