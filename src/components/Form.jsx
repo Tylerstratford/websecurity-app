@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createBlogPost } from "../functions/createBlog";
+import DOMPurify from "dompurify";
 
 const MessageForm = ({ addMessage }) => {
   const { user } = useAuth0();
@@ -35,10 +36,10 @@ const MessageForm = ({ addMessage }) => {
 
     const message = {
       id: user.sub,
-      title: formData.title,
-      body: formData.body,
+      title: DOMPurify.sanitize(formData.title),
+      body: DOMPurify.sanitize(formData.body),
       userName: user.name,
-      fileName: formData.image || "",
+      fileName: DOMPurify.sanitize(formData.image || ""),
     };
 
     const newblog = await createBlogPost(message);
