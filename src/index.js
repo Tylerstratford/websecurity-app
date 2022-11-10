@@ -12,7 +12,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <Auth0Provider domain={domain} clientId={clientId}>
+      <Auth0Provider
+        domain={domain}
+        clientId={clientId}
+        redirectUri={window.location.origin}
+      >
         <App />
       </Auth0Provider>
     </Router>

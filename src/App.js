@@ -5,7 +5,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import LandingPage from "./views/LandingPage";
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "./views/LoginPage";
+// import LoginPage from "./views/LoginPage";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -25,7 +25,7 @@ function App() {
             path="/createBlogPost"
             element={<Form addMessage={addMessage} />}
           />
-          <Route path="/login" element={<LoginPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
         </Routes>
       </div>
     </>

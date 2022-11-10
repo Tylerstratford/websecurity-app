@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { createBlogPost } from "../functions/createBlog";
 
 const MessageForm = ({ addMessage }) => {
+  const { user } = useAuth0();
   const [error, setError] = useState("");
+  const [showElement, setShowElement] = useState(true);
+  useEffect(() => {
+    setTimeout(function () {
+      setShowElement(false);
+    }, 5000);
+  }, []);
   const [formData, setFormData] = useState({
     title: "",
     body: "",
-    imgUrl: "",
+    image: "",
+    userName: "",
   });
 
   const handleChange = (e) => {
@@ -15,7 +25,7 @@ const MessageForm = ({ addMessage }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.body) {
       setError("Enter all fields");
@@ -24,12 +34,22 @@ const MessageForm = ({ addMessage }) => {
     setError("");
 
     const message = {
-      id: Date.now().toString(),
+      id: user.sub,
       title: formData.title,
       body: formData.body,
+      userName: user.name,
+      fileName: formData.image || "",
     };
 
-    addMessage(message);
+    const newblog = await createBlogPost(message);
+    if (newblog === 201) {
+      window.alert("Blog posted!");
+      formData.title = "";
+      formData.body = "";
+      e.target.reset();
+    } else window.alert("Something went wrong");
+    // createBlogPost(message);
+    // addMessage(message);
   };
 
   return (
@@ -46,7 +66,6 @@ const MessageForm = ({ addMessage }) => {
               onChange={handleChange}
               name="title"
             ></input>
-            <p className="error-message">{error}</p>
             <div>
               <textarea
                 placeholder="Write something..."
@@ -55,7 +74,7 @@ const MessageForm = ({ addMessage }) => {
               />
               <p className="error-message">{error}</p>
             </div>
-            <input className="upload-image" type="file"></input>
+            <input name="image" className="upload-image" type="file"></input>
             <button>Submit blog</button>
           </form>
         </div>

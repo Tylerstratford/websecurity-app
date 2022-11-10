@@ -19,7 +19,7 @@
   margin-bottom: 0.5rem;
   // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   // border-bottom: 1px solid #bfefd4;
-  margin-bottom: 1rem;
+  // margin-bottom: 1rem;
 
   .post-container-left {
     height: 100%;
@@ -29,7 +29,7 @@
     justify-content: center;
     text-align: left;
     align-items: center;
-    border-right: 1px solid #bfefd4;
+    border-right: 2px solid #bfefd4;
   }
 
   .blog-title {
@@ -50,7 +50,6 @@
 
 }
 .socials {
-  bottom: 0;
   width: 25%;
   display: flex;
   font-weight: 400;
@@ -73,7 +72,7 @@
   }
 }
 
-.test {
+.border-bottom {
   border-bottom: 1px dotted rgb(210, 127, 127);
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }

@@ -111,7 +111,6 @@ form button:hover {
   justify-content: space-between;
   background: white;
   margin-bottom: 0.5rem;
-  margin-bottom: 1rem;
 }
 .post-container .post-container-left {
   height: 100%;
@@ -121,7 +120,7 @@ form button:hover {
   justify-content: center;
   text-align: left;
   align-items: center;
-  border-right: 1px solid #bfefd4;
+  border-right: 2px solid #bfefd4;
 }
 .post-container .blog-title {
   font-size: 2rem;
@@ -139,7 +138,6 @@ form button:hover {
 }
 
 .socials {
-  bottom: 0;
   width: 25%;
   display: flex;
   font-weight: 400;
@@ -163,27 +161,28 @@ form button:hover {
   margin-left: 0.5rem;
 }
 
-.test {
+.border-bottom {
   border-bottom: 1px dotted rgb(210, 127, 127);
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 }
 
 .navbar-container {
   position: relative;
   z-index: 99;
-  height: 10vh;
+  height: 75px;
   width: 100%;
   background: black;
   position: fixed;
   color: white;
-  left: 50%;
-  transform: translate(-50%, 0);
 }
 .navbar-container .navbar-right {
   display: flex;
   justify-content: space-between;
+  align-content: center;
+  height: auto;
 }
 .navbar-container .navbar-right .navLink {
+  margin: 0;
   margin-left: 2rem;
   color: white;
   text-decoration: none;

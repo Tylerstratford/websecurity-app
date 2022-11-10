@@ -1,8 +1,13 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { useEffect, useState } from "react";
+import { useAuth0, User } from "@auth0/auth0-react";
+
 const Post = ({ post }) => {
+  const { isAuthenticated, user } = useAuth0();
+
   return (
-    <div className="test">
+    <div className="border-bottom">
       <div className="post-container">
         <div className="post-container-left">
           <h1 className="blog-title">"{post.title}"</h1>
@@ -19,11 +24,11 @@ const Post = ({ post }) => {
           <p>Comment</p>
         </div>
         <div className="social-icons">
-        <Icon icon="icon-park-solid:like" />
+          <Icon icon="icon-park-solid:like" />
           <p>Like</p>
         </div>
         <div className="social-icons">
-        <Icon className="social-icon-icons" icon="flat-color-icons:share" />
+          <Icon className="social-icon-icons" icon="flat-color-icons:share" />
           <p>Share</p>
         </div>
       </div>

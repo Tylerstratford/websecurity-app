@@ -1,34 +1,36 @@
 .navbar-container {
-    position: relative;
-    z-index: 99;
-    height: 10vh;
-    width: 100%;
-    background: black;
-    position: fixed;
-    color: white;
-    left: 50%;
-    transform: translate(-50%, 0);
+  position: relative;
+  z-index: 99;
+  height: 75px;
+  width: 100%;
+  background: black;
+  position: fixed;
+  color: white;
+  //   left: 50%;
+  //   transform: translate(-50%, 0);
 
-    .navbar-right {
-        display: flex;
-        justify-content: space-between;
+  .navbar-right {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    height: auto;
 
-        .navLink {
-            margin-left: 2rem;
-            color: white;
-            text-decoration: none;
-            transition: all 0.2s ease;
+    .navLink {
+      margin: 0;
+      margin-left: 2rem;
+      color: white;
+      text-decoration: none;
+      transition: all 0.2s ease;
 
-            &:hover {
-                transform: scale(1.02);
-            }
-        }
+      &:hover {
+        transform: scale(1.02);
+      }
     }
+  }
 
-    .flex {
-        display: flex;
-        justify-content: space-between;
+  .flex {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-
-    }
+  }
 }
