@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "WMSMUXLpfWrZl5WOa46bHDWrRPorRQ4pPUDjX6ujHLg=",
+  "Source": "Websecurity-api",
+  "BasePath": "_content/Websecurity-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
