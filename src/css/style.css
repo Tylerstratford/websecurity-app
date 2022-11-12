@@ -200,6 +200,11 @@ form button:hover {
 .navbar-container .navbar-right .navLink:hover {
   transform: scale(1.02);
 }
+.navbar-container .navbar-right .userName {
+  margin: 0;
+  margin-left: 2rem;
+  color: white;
+}
 .navbar-container .flex {
   display: flex;
   justify-content: space-between;

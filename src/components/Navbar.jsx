@@ -31,7 +31,7 @@ const Navbar = () => {
               Logout{" "}
             </NavLink>
           )}
-          {isAuthenticated && <p>{user.name}</p>}
+          {isAuthenticated && <p className="userName">Hello, {user.name}</p>}
           {/* <NavLink onClick={() => loginWithRedirect()} className="navLink">
              Login
            </NavLink> */}
