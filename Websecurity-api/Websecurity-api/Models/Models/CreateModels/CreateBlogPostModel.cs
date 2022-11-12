@@ -25,6 +25,8 @@
 
         public string FileName { get { return fileName; } set { fileName = value; } }
 
+        public IFormFile File { get; set; } = null!;
+
 
     }
 }

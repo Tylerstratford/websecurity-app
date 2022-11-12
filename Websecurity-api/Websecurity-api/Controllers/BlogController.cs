@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,31 @@ namespace Websecurity_api.Controllers
     public class BlogController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        //private readonly FileUploadController _fileUploadController;
         private string[] _tagsAllowed = new string[] { "<b>", "</b>", "<i>", "</i>" };
 
-        public BlogController(ApplicationDbContext context)
+        private BlobServiceClient serviceClient;
+        private BlobContainerClient containerClient;
+        private BlobClient blobClient = null!;
+
+
+
+        public BlogController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            //_fileUploadController = fileUploadController;
+            //_fileUploadController = IConfiguration;
+
+            serviceClient = new BlobServiceClient(configuration.GetConnectionString("StorageAccount"));
+            try
+            {
+                containerClient = serviceClient.CreateBlobContainer("images");
+                containerClient.SetAccessPolicy(Azure.Storage.Blobs.Models.PublicAccessType.BlobContainer);
+            }
+            catch
+            {
+                containerClient = serviceClient.GetBlobContainerClient("images");
+            }
         }
 
         // GET: api/Blog
@@ -94,12 +115,14 @@ namespace Websecurity_api.Controllers
             return NoContent();
         }
 
-        // POST: api/Blog
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity(CreateBlogPostModel model)
+        public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity([FromForm, FromBody]CreateBlogPostModel model)
         {
 
+            //blobClient = new BlobClient();
+            //var UploadController = _fileUploadController.blobClient;
+
+            //var ImagineController = new FileUploadController();
             var _user = await _context.Users.Where(x => x.AppId == model.AppId).FirstOrDefaultAsync();
 
             string encodedTitle = HttpUtility.HtmlEncode(model.Title);
@@ -114,6 +137,10 @@ namespace Websecurity_api.Controllers
 
             if (_user == null)
             {
+                //FileUploadController uploadFile = new FileUploadController(UploadController);
+                using var file = model.File.OpenReadStream();
+                blobClient = containerClient.GetBlobClient($"IMG_{Guid.NewGuid()}{Path.GetExtension(model.File.FileName)}");
+                await blobClient.UploadAsync(file);
                 var _blogPostEntity = new BlogEntity()
                 {
                     AppId = model.AppId,
