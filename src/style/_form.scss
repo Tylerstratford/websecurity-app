@@ -1,9 +1,12 @@
-
 .form-page-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  // height: 100vh;
+  width: 1078px;
   height: 100vh;
+  margin: 0 auto;
 }
 
 .form-container {
@@ -13,18 +16,25 @@
   margin: 0 auto;
   height: auto;
   width: 1078px;
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 
   .form-left {
-    width: 50%;
-    height: auto;
+    width: 500px;
+    height: 350px;
     background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     // border-top-left-radius: 18px;
     // border-bottom-left-radius: 18px;
-
+    .img {
+      width: 95%;
+      height: 95%;
+      padding: 1rem;
+      object-fit: contain;
+    }
     h1 {
       color: black;
     }
@@ -53,7 +63,6 @@ form {
     border-bottom: 1px solid black;
     position: relative;
     padding-left: 0.5rem;
-
   }
 
   input::placeholder {
@@ -64,7 +73,7 @@ form {
   .error-message {
     margin-top: -0.8rem;
     font-size: 0.8rem;
-    color: #EF7A85; 
+    color: #ef7a85;
   }
 
   textarea {
@@ -85,9 +94,9 @@ form {
     width: 100%;
   }
 
- .upload-image {
+  .upload-image {
     margin-bottom: 1rem;
- }
+  }
 
   button {
     background: white;
@@ -99,13 +108,13 @@ form {
     border: 1px solid black;
     font-weight: 600;
     cursor: pointer;
-    float: right; 
+    float: right;
     margin-right: 1rem;
     font-size: 1.2rem;
     transition: all 0.2s ease;
     &:hover {
-        background: black;
-        color: white;
+      background: black;
+      color: white;
     }
   }
 }

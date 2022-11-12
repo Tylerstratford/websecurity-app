@@ -2,11 +2,27 @@ import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { createBlogPost } from "../functions/createBlog";
 import DOMPurify from "dompurify";
+import defaultImage from "../images/defaultImage.png";
 
 const MessageForm = ({ addMessage }) => {
   const { user } = useAuth0();
   const [error, setError] = useState("");
   const [showElement, setShowElement] = useState(true);
+
+  const defaultImg = defaultImage;
+  const [imgSrc, setImageSrc] = useState(defaultImg);
+
+  const setImage = (e) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = (x) => {
+      setImageSrc(x.target.result);
+    };
+
+    // setFormData(e.target.files[0])
+  };
+
   useEffect(() => {
     setTimeout(function () {
       setShowElement(false);
@@ -55,9 +71,11 @@ const MessageForm = ({ addMessage }) => {
 
   return (
     <div className="form-page-container">
+      <h1>Create a post</h1>
+
       <div className="form-container">
         <div className="form-left">
-          <h1>Create a post</h1>
+          <img className="img" src={imgSrc} />
         </div>
         <div className="form-right">
           <form onSubmit={handleSubmit}>
@@ -75,7 +93,13 @@ const MessageForm = ({ addMessage }) => {
               />
               <p className="error-message">{error}</p>
             </div>
-            <input name="image" className="upload-image" type="file"></input>
+            <input
+              name="image"
+              className="upload-image"
+              type="file"
+              accept="image/*"
+              onChange={setImage}
+            ></input>
             <button>Submit blog</button>
           </form>
         </div>
