@@ -10,9 +10,9 @@ export async function createBlogPost(blogPost) {
     const response = await fetch("https://localhost:7290/api/Blog", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        // "Content-Type": "multipart/form-data",
       },
-      body: JSON.stringify(newBlogPost),
+      body: blogPost,
     });
       
     const result = response.status;

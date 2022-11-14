@@ -32,9 +32,7 @@ const Navbar = () => {
             </NavLink>
           )}
           {isAuthenticated && <p className="userName">Hello, {user.name}</p>}
-          {/* <NavLink onClick={() => loginWithRedirect()} className="navLink">
-             Login
-           </NavLink> */}
+
         </div>
       </div>
     </div>

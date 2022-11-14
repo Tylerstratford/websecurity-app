@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 import Post from "./Post";
 
@@ -8,6 +9,7 @@ const Posts = ({ posts }) => {
     async function fetchBlogs() {
       const res = await fetch("https://localhost:7290/api/Blog");
       setPosts(await res.json());
+
     }
 
     fetchBlogs();
@@ -16,7 +18,6 @@ const Posts = ({ posts }) => {
     <div className="container">
       <div className="posts-container">
         <p className="blog-post-title">Posts</p>
-        {/* {post && post.map((post) => <Post key={post.id} post={post} />)} */}
         {post &&
           post
             .sort(function (a, b) {

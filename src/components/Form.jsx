@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { createBlogPost } from "../functions/createBlog";
 import DOMPurify from "dompurify";
 import defaultImage from "../images/defaultImage.png";
+import axios from "axios";
 
 const MessageForm = ({ addMessage }) => {
   const { user } = useAuth0();
@@ -20,7 +21,10 @@ const MessageForm = ({ addMessage }) => {
       setImageSrc(x.target.result);
     };
 
-    // setFormData(e.target.files[0])
+    setFormData((data) => ({
+      ...data,
+      [e.target.name]: e.target.files[0],
+    }));
   };
 
   useEffect(() => {
@@ -31,8 +35,8 @@ const MessageForm = ({ addMessage }) => {
   const [formData, setFormData] = useState({
     title: "",
     body: "",
-    image: "",
     userName: "",
+    image: null,
   });
 
   const handleChange = (e) => {
@@ -50,23 +54,35 @@ const MessageForm = ({ addMessage }) => {
     }
     setError("");
 
-    const message = {
-      id: user.sub,
-      title: DOMPurify.sanitize(formData.title),
-      body: DOMPurify.sanitize(formData.body),
-      userName: user.name,
-      fileName: DOMPurify.sanitize(formData.image || ""),
-    };
+    const message = new FormData();
+    message.append("appId", user.sub);
+    message.append("title", formData.title);
+    message.append("body", formData.body);
+    message.append("userName", user.name);
 
-    const newblog = await createBlogPost(message);
-    if (newblog === 201) {
+    if (formData.image === null) {
+      message.append("file", formData.image);
+      message.get("file");
+      message.delete("file");
+
+    } else {
+      message.append("file", formData.image);
+    }
+
+    const newblog = await axios.post(
+      "https://localhost:7290/api/Blog",
+      message
+    );
+
+    if (newblog.status === 201) {
       window.alert("Blog posted!");
       formData.title = "";
       formData.body = "";
       e.target.reset();
     } else window.alert("Something went wrong");
+
     // createBlogPost(message);
-    // addMessage(message);
+    addMessage(message);
   };
 
   return (
@@ -78,7 +94,7 @@ const MessageForm = ({ addMessage }) => {
           <img className="img" src={imgSrc} />
         </div>
         <div className="form-right">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <input
               className="title-input"
               placeholder="Title"

@@ -116,7 +116,7 @@ namespace Websecurity_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity([FromForm, FromBody]CreateBlogPostModel model)
+        public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity([FromForm]CreateBlogPostModel model)
         {
 
             //blobClient = new BlobClient();
@@ -135,12 +135,14 @@ namespace Websecurity_api.Controllers
                 encodedTitle = encodedTitle.Replace(encodedTag,tag);
             }
 
+            using var file = model.File.OpenReadStream();
+            blobClient = containerClient.GetBlobClient($"IMG_{Guid.NewGuid()}{Path.GetExtension(model.File.FileName)}");
+            await blobClient.UploadAsync(file);
+
             if (_user == null)
             {
                 //FileUploadController uploadFile = new FileUploadController(UploadController);
-                using var file = model.File.OpenReadStream();
-                blobClient = containerClient.GetBlobClient($"IMG_{Guid.NewGuid()}{Path.GetExtension(model.File.FileName)}");
-                await blobClient.UploadAsync(file);
+
                 var _blogPostEntity = new BlogEntity()
                 {
                     AppId = model.AppId,
@@ -152,7 +154,7 @@ namespace Websecurity_api.Controllers
                     Title = encodedTitle,
                     Body = encodedBody,
                     Created = DateTime.Now.ToString(),
-                    FileName = model.FileName,
+                    FileName = blobClient.Uri.ToString(),
                     File = null
                 };
                 _context.Blogs.Add(_blogPostEntity);
@@ -168,7 +170,7 @@ namespace Websecurity_api.Controllers
                 encodedTitle,
                 encodedBody,
                 DateTime.Now.ToString(),
-                model.FileName,
+                blobClient.Uri.ToString(),
                 null);
 
             _context.Blogs.Add(blogPostEntity);

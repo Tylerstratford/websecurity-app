@@ -21,11 +21,10 @@ const Post = ({ post }) => {
             className="blog-body"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.body) }}
           >
-            {/* {post.body} */}
           </h2>
         </div>
         <div className="post-container-right">
-          <h5>this is an image</h5>
+          <img src={post.fileName}/>
         </div>
       </div>
 
