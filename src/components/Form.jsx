@@ -9,6 +9,7 @@ const MessageForm = ({ addMessage }) => {
   const { user } = useAuth0();
   const [error, setError] = useState("");
   const [showElement, setShowElement] = useState(true);
+  const [visible, setVisible] = useState(true)
 
   const defaultImg = defaultImage;
   const [imgSrc, setImageSrc] = useState(defaultImg);
@@ -46,6 +47,15 @@ const MessageForm = ({ addMessage }) => {
     }));
   };
 
+  const removeImage = (e) => {
+    setImageSrc(defaultImage);
+    e.target.reset();
+  };
+
+  const removeElement = () => {
+    setVisible((prev) => !prev);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.body) {
@@ -54,35 +64,39 @@ const MessageForm = ({ addMessage }) => {
     }
     setError("");
 
-    const message = new FormData();
+    let message = new FormData();
     message.append("appId", user.sub);
     message.append("title", formData.title);
     message.append("body", formData.body);
     message.append("userName", user.name);
 
     if (formData.image === null) {
-      message.append("file", formData.image);
-      message.get("file");
-      message.delete("file");
-
+      message.append("image", formData.image);
+      message.get("image", formData.image);
+      message.delete("image", formData.image);
     } else {
       message.append("file", formData.image);
     }
 
-    const newblog = await axios.post(
-      "https://localhost:7290/api/Blog",
-      message
-    );
+    try {
+      const newblog = await axios.post(
+        "https://localhost:7290/api/Blog",
+        message
+      );
 
-    if (newblog.status === 201) {
-      window.alert("Blog posted!");
-      formData.title = "";
-      formData.body = "";
-      e.target.reset();
-    } else window.alert("Something went wrong");
-
-    // createBlogPost(message);
-    addMessage(message);
+      if (newblog.status === 201) {
+        window.alert("Blog posted!");
+        console.log(newblog.status);
+        formData.title = "";
+        formData.body = "";
+        setImageSrc(defaultImage);
+        e.target.reset();
+      }
+    } catch (newblog) {
+      if (newblog.status !== 201) {
+        window.alert("Something went wrong :(");
+      }
+    }
   };
 
   return (
@@ -113,11 +127,19 @@ const MessageForm = ({ addMessage }) => {
               name="image"
               className="upload-image"
               type="file"
-              accept="image/*"
+              accept=".jpg, .png"
               onChange={setImage}
             ></input>
+            <h5>.jpg or .png</h5>
+
             <button>Submit blog</button>
           </form>
+          {formData.image && (
+            visible && (
+              <button onClick={() => { removeImage(); removeElement(); }}>Remove image</button>
+
+            )
+          )}
         </div>
       </div>
     </div>

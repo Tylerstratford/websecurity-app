@@ -10,7 +10,7 @@ namespace Websecurity_api.Models.Entities
         {
 
         }
-        public BlogEntity(string appId, string userName, UserEntity user, string title, string body, string created, string? fileName, IFormFile file)
+        public BlogEntity(string appId, string userName, UserEntity user, string title, string body, string created, string? fileName)
         {
             AppId = appId;
             UserName = userName;
@@ -19,7 +19,7 @@ namespace Websecurity_api.Models.Entities
             Body = body;
             Created = created;
             FileName = fileName;
-            File = file;
+            //File = file;
         }
 
         [Key]
@@ -47,9 +47,9 @@ namespace Websecurity_api.Models.Entities
 
         public string? FileName { get; set; }
 
-        [NotMapped]
-        [Display(Name = "Upload File")]
-        public IFormFile? File { get; set; }
+        //[NotMapped]
+        //[Display(Name = "Upload File")]
+        //public IFormFile? File { get; set; }
 
 
 

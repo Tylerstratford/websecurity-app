@@ -11,7 +11,7 @@ using Websecurity_api.Data;
 namespace Websecurity_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221112195618_init")]
+    [Migration("20221115083715_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -135,50 +135,71 @@ namespace Websecurity_api.Controllers
                 encodedTitle = encodedTitle.Replace(encodedTag,tag);
             }
 
-            using var file = model.File.OpenReadStream();
-            blobClient = containerClient.GetBlobClient($"IMG_{Guid.NewGuid()}{Path.GetExtension(model.File.FileName)}");
-            await blobClient.UploadAsync(file);
+            var imageFile = "";
 
-            if (_user == null)
+            if(model.File != null)
             {
-                //FileUploadController uploadFile = new FileUploadController(UploadController);
+                using var file = model.File.OpenReadStream();
+                blobClient = containerClient.GetBlobClient($"IMG_{Guid.NewGuid()}{Path.GetExtension(model.File.FileName)}");
+                var response = await blobClient.UploadAsync(file);
 
-                var _blogPostEntity = new BlogEntity()
-                {
-                    AppId = model.AppId,
-                    UserName = model.UserName,
-                    User = new UserEntity()
-                    {
-                        AppId = model.AppId,
-                    },
-                    Title = encodedTitle,
-                    Body = encodedBody,
-                    Created = DateTime.Now.ToString(),
-                    FileName = blobClient.Uri.ToString(),
-                    File = null
-                };
-                _context.Blogs.Add(_blogPostEntity);
-                await _context.SaveChangesAsync();
-
-                return CreatedAtAction("GetBlogEntity", new { id = _blogPostEntity.Id }, _blogPostEntity);
+                imageFile = blobClient.Uri.AbsoluteUri.ToString();
+            } else
+            {
+                imageFile = "";
             }
 
-            var blogPostEntity = new BlogEntity(
-                model.AppId,
-                model.UserName,
-                _user,
-                encodedTitle,
-                encodedBody,
-                DateTime.Now.ToString(),
-                blobClient.Uri.ToString(),
-                null);
+            var fileExtension = Path.GetExtension(imageFile);
 
-            _context.Blogs.Add(blogPostEntity);
-          
+
+            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" || fileExtension == null)
+            {
+
+                if (_user == null)
+                {
+                    //FileUploadController uploadFile = new FileUploadController(UploadController);
+
+                    var _blogPostEntity = new BlogEntity()
+                    {
+                        AppId = model.AppId,
+                        UserName = model.UserName,
+                        User = new UserEntity()
+                        {
+                            AppId = model.AppId,
+                        },
+                        Title = encodedTitle,
+                        Body = encodedBody,
+                        Created = DateTime.Now.ToString(),
+                        FileName = imageFile,
+                    };
+                    _context.Blogs.Add(_blogPostEntity);
+                    await _context.SaveChangesAsync();
+
+                    return CreatedAtAction("GetBlogEntity", new { id = _blogPostEntity.Id }, _blogPostEntity);
+                }
+
+                var blogPostEntity = new BlogEntity(
+                    model.AppId,
+                    model.UserName,
+                    _user,
+                    encodedTitle,
+                    encodedBody,
+                    DateTime.Now.ToString(),
+                    imageFile
+                    );
+
+                _context.Blogs.Add(blogPostEntity);
+
                 await _context.SaveChangesAsync();
-            
 
-            return CreatedAtAction("GetBlogEntity", new { id = blogPostEntity.Id }, blogPostEntity);
+
+                return CreatedAtAction("GetBlogEntity", new { id = blogPostEntity.Id }, blogPostEntity);
+            } else
+            {
+                return BadRequest("File must be jpg or png");
+            }
+
+
         }
 
         // DELETE: api/Blog/5

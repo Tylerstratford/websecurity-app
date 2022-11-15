@@ -41,6 +41,11 @@
   align-items: center;
   width: 50%;
 }
+.form-container .form-right h5 {
+  margin: 0;
+  color: gray;
+  font-weight: 300;
+}
 
 form {
   height: auto;
@@ -82,7 +87,8 @@ form textarea::placeholder {
   width: 100%;
 }
 form .upload-image {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  cursor: pointer;
 }
 form button {
   background: white;
