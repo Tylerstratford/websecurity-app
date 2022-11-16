@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace Websecurity_api.Controllers
 
         // GET: api/Blog
         [HttpGet]
+
         public async Task<ActionResult<IEnumerable<BlogEntity>>> GetBlogs()
         {
             List<BlogEntity> Blogs = await _context.Blogs.ToListAsync();
@@ -116,6 +118,8 @@ namespace Websecurity_api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
+
         public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity([FromForm]CreateBlogPostModel model)
         {
 
@@ -152,7 +156,7 @@ namespace Websecurity_api.Controllers
             var fileExtension = Path.GetExtension(imageFile);
 
 
-            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" || fileExtension == null)
+            if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png" || fileExtension == "")
             {
 
                 if (_user == null)
@@ -224,3 +228,6 @@ namespace Websecurity_api.Controllers
         }
     }
 }
+
+
+

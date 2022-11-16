@@ -9,7 +9,7 @@ const MessageForm = ({ addMessage }) => {
   const { user } = useAuth0();
   const [error, setError] = useState("");
   const [showElement, setShowElement] = useState(true);
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
 
   const defaultImg = defaultImage;
   const [imgSrc, setImageSrc] = useState(defaultImg);
@@ -47,15 +47,21 @@ const MessageForm = ({ addMessage }) => {
     }));
   };
 
-  const removeImage = (e) => {
-    setImageSrc(defaultImage);
-    e.target.reset();
-  };
+  // const removeImage = () => {
+  //   setImageSrc(defaultImage);
+    // e.target.reset();
 
-  const removeElement = () => {
-    setVisible((prev) => !prev);
-  }
+    // formData.image = null;
+    // e.reset();
+  // };
 
+  // const removeElement = () => {
+  //   setVisible((prev) => !prev);
+  // };
+
+
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.body) {
@@ -131,15 +137,8 @@ const MessageForm = ({ addMessage }) => {
               onChange={setImage}
             ></input>
             <h5>.jpg or .png</h5>
-
-            <button>Submit blog</button>
+            <button type="submit">Submit blog</button>
           </form>
-          {formData.image && (
-            visible && (
-              <button onClick={() => { removeImage(); removeElement(); }}>Remove image</button>
-
-            )
-          )}
         </div>
       </div>
     </div>

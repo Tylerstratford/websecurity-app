@@ -110,6 +110,13 @@ form button:hover {
   color: white;
 }
 
+.removeImage {
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+  background: red;
+}
+
 .posts-container .blog-post-title {
   color: #3c91e6;
   font-size: 2rem;
