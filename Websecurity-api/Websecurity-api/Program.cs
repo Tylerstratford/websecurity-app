@@ -25,23 +25,13 @@ builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    //options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    //{
-    //    NameClaimType = ClaimTypes.NameIdentifier
-    //};
+
 }).AddJwtBearer(options =>
 {
     options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
     options.Audience = builder.Configuration["Auth0:Audience"];
 });
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("post:blogs", policy => policy.Requirements.Add(new HasScopedRequirement("post:blogs", domain)));
-
-//});
-
-//builder.Services.AddSingleton<IAuthorizationHandler, HasScopedHandler>();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -66,7 +56,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 
 });
-
 
 
 

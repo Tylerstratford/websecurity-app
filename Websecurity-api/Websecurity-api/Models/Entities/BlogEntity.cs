@@ -47,11 +47,6 @@ namespace Websecurity_api.Models.Entities
 
         public string? FileName { get; set; }
 
-        //[NotMapped]
-        //[Display(Name = "Upload File")]
-        //public IFormFile? File { get; set; }
-
-
 
     }
 }

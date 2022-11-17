@@ -19,7 +19,6 @@ namespace Websecurity_api.Controllers
     public class BlogController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        //private readonly FileUploadController _fileUploadController;
         private string[] _tagsAllowed = new string[] { "<b>", "</b>", "<i>", "</i>" };
 
         private BlobServiceClient serviceClient;
@@ -31,8 +30,7 @@ namespace Websecurity_api.Controllers
         public BlogController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
-            //_fileUploadController = fileUploadController;
-            //_fileUploadController = IConfiguration;
+
 
             serviceClient = new BlobServiceClient(configuration.GetConnectionString("StorageAccount"));
             try
@@ -123,10 +121,6 @@ namespace Websecurity_api.Controllers
         public async Task<ActionResult<CreateBlogPostModel>>PostBlogEntity([FromForm]CreateBlogPostModel model)
         {
 
-            //blobClient = new BlobClient();
-            //var UploadController = _fileUploadController.blobClient;
-
-            //var ImagineController = new FileUploadController();
             var _user = await _context.Users.Where(x => x.AppId == model.AppId).FirstOrDefaultAsync();
 
             string encodedTitle = HttpUtility.HtmlEncode(model.Title);
@@ -161,7 +155,6 @@ namespace Websecurity_api.Controllers
 
                 if (_user == null)
                 {
-                    //FileUploadController uploadFile = new FileUploadController(UploadController);
 
                     var _blogPostEntity = new BlogEntity()
                     {

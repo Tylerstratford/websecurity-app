@@ -5,26 +5,23 @@ import { useAuth0, User } from "@auth0/auth0-react";
 import DOMPurify from "dompurify";
 
 const Post = ({ post }) => {
-  const { isAuthenticated, user } = useAuth0();
-
   return (
     <div className="border-bottom">
       <div className="post-container">
         <div className="post-container-left">
           <h1
             className="blog-title"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(`"${post.title}"`) }}
-          >
-            {/* "{post.title}" */}
-          </h1>
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(`"${post.title}"`),
+            }}
+          ></h1>
           <h2
             className="blog-body"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.body) }}
-          >
-          </h2>
+          ></h2>
         </div>
         <div className="post-container-right">
-          <img src={post.fileName}/>
+          <img src={post.fileName} />
         </div>
       </div>
 

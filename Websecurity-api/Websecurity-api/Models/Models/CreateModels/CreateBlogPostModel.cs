@@ -6,7 +6,6 @@
         private string body;
         private string appId;
         private string userName;
-        //private string fileName;
 
 
         public string AppId { get { return appId; } set {appId = value; } }
@@ -21,9 +20,6 @@
         }
 
         public string UserName { get { return userName; } set { userName = value; } }
-
-
-        //public string FileName { get { return fileName; } set { fileName = value; } }
 
         public IFormFile? File { get; set; } = null!;
 

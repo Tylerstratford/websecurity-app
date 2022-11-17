@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { createBlogPost } from "../functions/createBlog";
-import DOMPurify from "dompurify";
 import defaultImage from "../images/defaultImage.png";
 import axios from "axios";
+import DOMPurify from "dompurify";
 
 const MessageForm = ({ addMessage }) => {
   const { user, getAccessTokenSilently } = useAuth0();
@@ -50,18 +49,6 @@ const MessageForm = ({ addMessage }) => {
     }));
   };
 
-  // const removeImage = () => {
-  //   setImageSrc(defaultImage);
-  // e.target.reset();
-
-  // formData.image = null;
-  // e.reset();
-  // };
-
-  // const removeElement = () => {
-  //   setVisible((prev) => !prev);
-  // };
-
   useEffect(() => {
     const getUserMetadata = async () => {
       const domain = "dev-6daneagnz64w0i82.us.auth0.com";
@@ -102,8 +89,8 @@ const MessageForm = ({ addMessage }) => {
 
     let message = new FormData();
     message.append("appId", user.sub);
-    message.append("title", formData.title);
-    message.append("body", formData.body);
+    message.append("title", DOMPurify.sanitize(formData.title));
+    message.append("body", DOMPurify.sanitize(formData.body));
     message.append("userName", user.name);
 
     if (formData.image === null) {
@@ -113,7 +100,6 @@ const MessageForm = ({ addMessage }) => {
     } else {
       message.append("file", formData.image);
     }
-
 
     try {
       const newblog = await axios.post(
@@ -137,13 +123,10 @@ const MessageForm = ({ addMessage }) => {
     } catch (newblog) {
       if (newblog.status !== 201) {
         window.alert(
-          "Something went wrong :( Are you logged in or have you posted a file that is not .png pr .jpg"
+          "Something went wrong :( Are you logged in? Is the file you are posting a .jpg or .png (lower cases)?"
         );
       }
     }
-    // catch (e) {
-    //   console.error(e)
-    // }
   };
 
   return (
