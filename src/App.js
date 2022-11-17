@@ -5,9 +5,12 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import LandingPage from "./views/LandingPage";
 import { Routes, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 // import LoginPage from "./views/LoginPage";
 
 function App() {
+  const { isAuthenticated } = useAuth0();
   const [messages, setMessages] = useState([]);
   const addMessage = (message) => {
     setMessages((state) => [...state, message]);
@@ -21,10 +24,13 @@ function App() {
             path="/"
             element={[<LandingPage />, <Posts posts={messages} />]}
           />
-          <Route
-            path="/createBlogPost"
-            element={<Form addMessage={addMessage} />}
-          />
+          {isAuthenticated && (
+            <Route
+              path="/createBlogPost"
+              element={<Form addMessage={addMessage} />}
+            />
+          )}
+
           {/* <Route path="/login" element={<LoginPage />} /> */}
         </Routes>
       </div>

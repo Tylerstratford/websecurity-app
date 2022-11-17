@@ -6,10 +6,13 @@ import defaultImage from "../images/defaultImage.png";
 import axios from "axios";
 
 const MessageForm = ({ addMessage }) => {
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
   const [error, setError] = useState("");
   const [showElement, setShowElement] = useState(true);
   const [visible, setVisible] = useState(true);
+  const [token, setToken] = useState("");
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const [userMetadata, setUserMetadata] = useState(null);
 
   const defaultImg = defaultImage;
   const [imgSrc, setImageSrc] = useState(defaultImg);
@@ -49,19 +52,46 @@ const MessageForm = ({ addMessage }) => {
 
   // const removeImage = () => {
   //   setImageSrc(defaultImage);
-    // e.target.reset();
+  // e.target.reset();
 
-    // formData.image = null;
-    // e.reset();
+  // formData.image = null;
+  // e.reset();
   // };
 
   // const removeElement = () => {
   //   setVisible((prev) => !prev);
   // };
 
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      const domain = "dev-6daneagnz64w0i82.us.auth0.com";
 
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://${domain}/api/v2/`,
+          scope: "read:current_user",
+        });
 
-  
+        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+
+        const metadataResponse = await fetch(userDetailsByIdUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const { user_metadata } = await metadataResponse.json();
+        setToken(accessToken);
+
+        setUserMetadata(user_metadata);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+
+    getUserMetadata();
+  }, [getAccessTokenSilently, user?.sub, token]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.body) {
@@ -84,10 +114,16 @@ const MessageForm = ({ addMessage }) => {
       message.append("file", formData.image);
     }
 
+
     try {
       const newblog = await axios.post(
         "https://localhost:7290/api/Blog",
-        message
+        message,
+        {
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        }
       );
 
       if (newblog.status === 201) {
@@ -100,9 +136,14 @@ const MessageForm = ({ addMessage }) => {
       }
     } catch (newblog) {
       if (newblog.status !== 201) {
-        window.alert("Something went wrong :(");
+        window.alert(
+          "Something went wrong :( Are you logged in or have you posted a file that is not .png pr .jpg"
+        );
       }
     }
+    // catch (e) {
+    //   console.error(e)
+    // }
   };
 
   return (
